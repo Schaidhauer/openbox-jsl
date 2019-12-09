@@ -21,7 +21,7 @@ RUN pip install boto botocore boto3
 # Install ansible
 ARG ANSIBLE_VERSION=2.9
 
-RUN pip install ansible==$ANSIBLE_VERSION
+RUN pip install ansible==${ANSIBLE_VERSION}
 
 # Clona repositório do playbook de deploy na AWS
 RUN git clone git@github.com:Schaidhauer/aws-ansible.git /ansible
