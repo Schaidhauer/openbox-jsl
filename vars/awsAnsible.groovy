@@ -2,7 +2,7 @@ def call(Map params) {
     dFile = libraryResource('Dockerfile')
     sh "echo '" + dFile  + "'"
 
-    sh "echo '" + libraryResource('Dockerfile') + "' | " +
+    sh "echo '" + dFile + "' | " +
        "docker build --rm " +
        "--build-arg SSH_PRIVATE_KEY='" + params.sshGitKey + "' " +
        "--no-cache -t ansible-docker:latest -"
