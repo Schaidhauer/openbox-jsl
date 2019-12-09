@@ -1,4 +1,6 @@
 def call(Map params) {
+    sh "echo '" + libraryResource('Dockerfile') + "'"
+
     sh "echo '" + libraryResource('Dockerfile') + "' | " +
        "docker build --rm " +
        "--build-arg SSH_PRIVATE_KEY='" + params.sshGitKey + "' " +
