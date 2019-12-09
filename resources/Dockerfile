@@ -15,7 +15,7 @@ RUN apk add --update git openssh-client sshpass
 
 # Copia chaves necessarias para clonar
 RUN mkdir /root/.ssh/
-RUN cat rsa.key > /root/.ssh/github_rsa
+RUN cat /var/jenkins_home/rsa.key > /root/.ssh/github_rsa
 
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
