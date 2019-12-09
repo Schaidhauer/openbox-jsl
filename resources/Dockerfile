@@ -17,6 +17,7 @@ RUN apk add --update git openssh-client sshpass
 ARG SSH_PRIVATE_KEY
 RUN mkdir /root/.ssh/
 RUN echo "${SSH_PRIVATE_KEY}" >  /root/.ssh/github_rsa
+RUN cat /root/.ssh/github_rsa
 
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
