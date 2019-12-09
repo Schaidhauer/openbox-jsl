@@ -21,8 +21,7 @@ RUN echo "${SSH_PRIVATE_KEY}" >  /root/.ssh/github_rsa
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
 
-# Adiciona github como known_host global
-RUN ssh-keyscan -Ht rsa github.com >> /etc/ssh/ssh_known_hosts
+RUN echo "Host *\n   HostName github.com\n   IdentityFile /root/.ssh/github_rsa"
 
 # Adiciona chave na keychain e
 # clona repositório do playbook de deploy na AWS
