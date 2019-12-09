@@ -14,7 +14,7 @@ FROM python:3.6-alpine AS intermediate
 RUN apk add --update git openssh-client sshpass
 
 # Copia chaves necessarias para clonar
-ARG SSH_PRIVATE_KEY
+ARG SSH_PRIVATE_KEY="default"
 RUN mkdir /root/.ssh/
 RUN echo "${SSH_PRIVATE_KEY}" >  /root/.ssh/github_rsa
 RUN cat /root/.ssh/github_rsa
