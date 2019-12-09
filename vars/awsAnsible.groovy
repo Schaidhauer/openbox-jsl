@@ -1,7 +1,8 @@
 def call(Map params) {
+    sh "echo '" + credentials('jenkins-git-ansible-key') + "' > rsa.key"
+
     sh 'echo "' + libraryResource('Dockerfile') + '" | ' +
        'docker build --rm ' +
-       '--build-arg SSH_PRIVATE_KEY="' + credentials('jenkins-git-ansible-key') + '" ' +
        '--no-cache -t ansible-docker:latest -'
 
     sh 'docker run --rm ansible-docker:latest ansible-playbook ' + 
