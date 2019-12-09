@@ -1,5 +1,5 @@
 def call(Map params) {
-    sh 'echo "' + libraryResource('Dockerfile') + '" | '
+    sh 'echo "' + libraryResource('Dockerfile') + '" | ' +
        'docker build --rm ' +
        '--build-arg SSH_PRIVATE_KEY=' + credentials('jenkins-git-ansible-key') + ' ' +
        '--no-cache -t ansible-docker:latest -'
