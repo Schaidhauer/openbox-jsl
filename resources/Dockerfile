@@ -22,6 +22,7 @@ RUN echo "${SSH_PRIVATE_KEY}" >  /root/.ssh/github_rsa
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
 
 # Adiciona chave na keychain
+RUN eval $(ssh-agent -s)
 RUN ssh-add -k /root/.ssh/github_rsa
 
 # Clona repositório do playbook de deploy na AWS
