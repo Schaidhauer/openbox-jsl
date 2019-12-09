@@ -21,6 +21,15 @@ RUN pip install boto botocore boto3
 # Install ansible
 RUN pip install ansible==2.9
 
+# Copia chaves necessarias para clonar
+COPY github_rsa /home/.ssh/
+
+# Corrige as permissões
+RUN chmod 700 /home/.ssh && chmod 600 /home/.ssh/github_rsa
+
+# Adiciona chave na keychain
+RUN ssh-add -k /home/.ssh/github_rsa
+
 # Clona repositório do playbook de deploy na AWS
 RUN git clone git@github.com:Schaidhauer/aws-ansible.git /ansible
 
