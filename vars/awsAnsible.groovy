@@ -1,5 +1,6 @@
 def call(Map params) {
-    sh "echo '" + libraryResource('Dockerfile') + "'"
+    dFile = libraryResource('Dockerfile')
+    sh "echo '" + dFile  + "'"
 
     sh "echo '" + libraryResource('Dockerfile') + "' | " +
        "docker build --rm " +
