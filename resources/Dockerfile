@@ -23,7 +23,12 @@ RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
 
 # Adiciona chave na keychain
 #RUN eval "$(ssh-agent -s)"
-#RUN ssh-add -k /root/.ssh/github_rsa
+#RUN ssh-add -k /root/.ssh/github_rsai
+RUN echo "Host *
+  HostName github.com
+  IdentityFile /root/.ssh/github_rsa
+  User git
+  StrictHostKeyChecking no" > /etc/ssh/ssh_config
 
 # Clona repositório do playbook de deploy na AWS
 RUN git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/
