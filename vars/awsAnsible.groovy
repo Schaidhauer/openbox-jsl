@@ -1,5 +1,5 @@
 def call(Map params) {
-    sh "echo '" + credentials('jenkins-git-ansible-key') + "' > /var/jenkins_home/rsa.key"
+    sh "echo '" + params.sshGitKey + "' > /var/jenkins_home/rsa.key"
 
     sh 'echo "' + libraryResource('Dockerfile') + '" | ' +
        'docker build --rm ' +
