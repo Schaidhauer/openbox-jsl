@@ -14,14 +14,17 @@ FROM python:3.6-alpine AS intermediate
 RUN apk add --update git openssh-client sshpass
 
 # Copia chaves necessarias para clonar
+ARG SSH_PRIVATE_KEY_FILE
 RUN mkdir /root/.ssh/
-RUN cat /var/jenkins_home/rsa.key > /root/.ssh/github_rsa
+COPY ${SSH_PRIVATE_KEY_FILE} /root/.ssh/
 
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
 
 # Adiciona entrada no ssh_config para buscar a chave privada correta
-RUN echo "Host *\n   HostName github.com\n   IdentityFile /root/.ssh/github_rsa" > /etc/ssh/ssh_config
+RUN echo -e "Host * \n\
+    HostName github.com \n\
+    IdentityFile /root/.ssh/github_rsa" > /etc/ssh/ssh_config
 
 # Adiciona github como known_host global
 RUN ssh-keyscan -Ht rsa github.com >> /etc/ssh/ssh_known_hosts
@@ -62,4 +65,4 @@ RUN pip install boto botocore boto3
 RUN pip install ansible==2.9
 
 # Define arquivo de hosts conhecidos para o SSH
-RUN 'echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config'
+RUN echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config
