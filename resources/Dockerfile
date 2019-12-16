@@ -35,7 +35,6 @@ RUN eval "$(ssh-agent)" \
     ssh-add -k /root/.ssh/github_rsa; \
     git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/
 
-
 ######## ESTÁGIO FINAL ########
 # Configura o ambiente para executar o Ansible
 FROM python:3.6-alpine
