@@ -3,6 +3,7 @@ def call(Map params) {
     sshKeyFile = "rsa.key"
     sshKeyDir = "/var/jenkins_home/tmp"
 
+    sh "mkdir " + sshKeyDir
     sh "echo '" + params.sshGitKey + "' > " + sshKeyDir + "/" + sshKeyFile
     sh "echo '" + libraryResource('Dockerfile')  + "' > " sshKeyDir + "/Dockerfile"
 
