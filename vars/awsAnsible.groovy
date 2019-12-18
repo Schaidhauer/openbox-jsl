@@ -15,5 +15,6 @@ def call(Map params) {
        '/ansible/' + params.playbook + '--extra-vars "{'
        'deploy: '  + params.deploy + ',' +
        'ec2_access_key: ' + params.accessKey + ',' +
-       'ec2_secret_key: ' + params.secretKey + '}"'
+       'ec2_secret_key: ' + params.secretKey + ',' +
+       'key_name: ' + params.keyname  + '}"'
 }
