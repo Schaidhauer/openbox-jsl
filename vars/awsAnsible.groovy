@@ -5,7 +5,8 @@ def call(Map params) {
 
     sh "mkdir " + sshKeyDir + " || rm -f " + sshKeyDir + "/*"
     sh "cp " + params.sshGitKey + " " + sshKeyDir + "/" + sshKeyFile
-    sh 'echo "' + libraryResource('Dockerfile') + '" > olar' // + '" > ' sshKeyDir + '/Dockerfile'
+    sh 'echo "' + libraryResource('Dockerfile') + '" > ' sshKeyDir + '/Dockerfile'
+    sh 'cat ' + sshKeyDir + '/Dockerfile'
 
 /*    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
