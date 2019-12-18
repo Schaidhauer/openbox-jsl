@@ -4,7 +4,7 @@ def call(Map params) {
     sshKeyDir = "/var/jenkins_home/tmp"
 
     sh "mkdir " + sshKeyDir
-    sh "echo '" + params.sshGitKey + "' > " + sshKeyDir + "/" + sshKeyFile
+    sh "cp " + params.sshGitKey + " " + sshKeyDir + "/" + sshKeyFile
     sh "echo '" + libraryResource('Dockerfile')  + "' > " sshKeyDir + "/Dockerfile"
 
     sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
