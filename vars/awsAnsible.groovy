@@ -5,9 +5,9 @@ def call(Map params) {
 
     sh "mkdir " + sshKeyDir + " || rm -f " + sshKeyDir + "/*"
     sh "cp " + params.sshGitKey + " " + sshKeyDir + "/" + sshKeyFile
-    sh 'echo "' + libraryResource('Dockerfile')  + '" > ' sshKeyDir + '/Dockerfile'
+    sh 'echo "' + libraryResource('Dockerfile') // + '" > ' sshKeyDir + '/Dockerfile'
 
-    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
+/*    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     sh 'rm -rf ' + sshKeyDir
@@ -17,5 +17,5 @@ def call(Map params) {
        'deploy: '  + params.deploy + ',' +
        'ec2_access_key: ' + params.accessKey + ',' +
        'ec2_secret_key: ' + params.secretKey + ',' +
-       'key_name: ' + params.keyname  + '}"'
+       'key_name: ' + params.keyname  + '}"'*/
 }
