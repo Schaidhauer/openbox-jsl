@@ -1,13 +1,13 @@
 def call(Map params) {
 
     sshKeyFile = "rsa.key"
-    sshKeyDir = "/var/jenkins_home/tmp/"
+    sshKeyDir = "/var/jenkins_home/tmp"
 
-    sh "echo '" + params.sshGitKey + "' > " + sshKeyDir + sshKeyFile
-    sh "echo '" + libraryResource('Dockerfile')  + "' > " sshKeyDir + "Dockerfile"
+    sh "echo '" + params.sshGitKey + "' > " + sshKeyDir + "/" + sshKeyFile
+    sh "echo '" + libraryResource('Dockerfile')  + "' > " sshKeyDir + "/Dockerfile"
 
     sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
-       '--no-cache -f ' + sshKeyDir + 'Dockerfile -t ansible-docker:latest '
+       '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     sh 'rm -rf ' + sshKeyDir
 
