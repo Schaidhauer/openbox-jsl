@@ -8,7 +8,7 @@ def call(Map params) {
     sh "echo -n '" + libraryResource('Dockerfile') + "' > /var/jenkins_home/tmp/Dockerfile"
     // sh 'docker ps'
 
-    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile +
+    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     sh 'rm -rf ' + sshKeyDir
