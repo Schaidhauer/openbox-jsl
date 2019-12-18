@@ -16,7 +16,7 @@ RUN apk add --update git openssh-client sshpass
 # Copia chaves necessarias para clonar
 ARG SSH_PRIVATE_KEY_FILE
 RUN mkdir /root/.ssh/
-COPY ${SSH_PRIVATE_KEY_FILE} /root/.ssh/
+COPY ${SSH_PRIVATE_KEY_FILE} /root/.ssh/github_rsa
 
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
