@@ -34,8 +34,6 @@ RUN ssh-keyscan -Ht rsa github.com >> /etc/ssh/ssh_known_hosts
 RUN eval "$(ssh-agent)" \
     ssh-add -k /root/.ssh/github_rsa; \
     git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/
-RUN ls /root/ansible
-RUN ls /root/ansible/ssh
 
 ######## ESTÁGIO FINAL ########
 # Configura o ambiente para executar o Ansible
@@ -58,8 +56,7 @@ VOLUME [ "/ansible" ]
 
 # Copia conteudo do container intermediario (clone do repositorio) para o volume
 COPY --from=intermediate /root/ansible /ansible
-RUN ls /ansible
-RUN ls /ansible/ssh
+RUN chmod 700 /ansible/ssh && chmod 600 /ansible/ssh/* && chmod 644 /ansible/ssh/*.pub 
 
 # Instala dependencias do Ansible
 RUN pip install boto botocore boto3
