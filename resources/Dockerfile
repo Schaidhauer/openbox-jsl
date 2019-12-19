@@ -59,7 +59,7 @@ VOLUME [ "/ansible" ]
 
 # Copia conteudo do container intermediario (clone do repositorio) para o volume
 # e restaura as permissões necessárias
-COPY --from=intermediate /root/ansible /ansible &&\
+COPY --from=intermediate /root/ansible /ansible
 
 RUN ls -lasht /ansible/ssh
 
