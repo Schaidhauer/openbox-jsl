@@ -57,7 +57,7 @@ WORKDIR /ansible
 VOLUME [ "/ansible" ]
 
 # Copia conteudo do container intermediario (clone do repositorio) para o volume
-COPY --from=intermediate /root/ansible/* /ansible/
+COPY --from=intermediate /root/ansible /ansible
 RUN ls /ansible
 RUN ls /ansible/ssh
 
