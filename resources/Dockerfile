@@ -56,7 +56,8 @@ VOLUME [ "/ansible" ]
 
 # Copia conteudo do container intermediario (clone do repositorio) para o volume
 COPY --from=intermediate /root/ansible /ansible
-RUN chmod 700 /ansible/ssh && chmod 600 /ansible/ssh/* && chmod 644 /ansible/ssh/*.pub 
+RUN chmod 600 /ansible/ssh/* && chmod 700 /ansible/ssh && chmod 644 /ansible/ssh/*.pub
+RUN ls -lasht /ansible/ssh
 
 # Instala dependencias do Ansible
 RUN pip install boto botocore boto3
