@@ -33,7 +33,10 @@ RUN ssh-keyscan -Ht rsa github.com >> /etc/ssh/ssh_known_hosts
 # clona repositório do playbook de deploy na AWS
 RUN eval "$(ssh-agent)" \
     ssh-add -k /root/.ssh/github_rsa; \
-    git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/
+    git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/ &&\
+    chmod 600 /root/ansible/ssh/* &&\
+    chmod 700 /root/ansible/ssh &&\
+    chmod 644 /root/ansible/ssh/*.pub
 
 ######## ESTÁGIO FINAL ########
 # Configura o ambiente para executar o Ansible
@@ -57,9 +60,6 @@ VOLUME [ "/ansible" ]
 # Copia conteudo do container intermediario (clone do repositorio) para o volume
 # e restaura as permissões necessárias
 COPY --from=intermediate /root/ansible /ansible &&\
-     chmod 600 /ansible/ssh/* &&\
-     chmod 700 /ansible/ssh &&\
-     chmod 644 /ansible/ssh/*.pub
 
 RUN ls -lasht /ansible/ssh
 
