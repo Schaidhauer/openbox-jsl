@@ -19,4 +19,6 @@ def call(Map params) {
        'ec2_access_key: ' + params.accessKey + ',' +
        'ec2_secret_key: ' + params.secretKey + ',' +
        'key_name: ' + params.keyname  + '}"'
+
+    sh 'docker rmi -f ansible-docker:latest'
 }
