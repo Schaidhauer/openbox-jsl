@@ -16,8 +16,7 @@ def call(Map params) {
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     // Executa o ansible para deploy na AWS
-    sh 'ls -lasht /var/jenkins_home'
-    sh 'docker run --rm -v ' + sshKeyDir + '/repokey:/ansible/ssh/repokey ' +
+    sh 'docker run --rm -v ' + sshKeyDir + ':/ansible/ssh/tmp ' +
        'ansible-docker:latest ansible-playbook ' + 
        '/ansible/' + params.playbook + ' --extra-vars "{' +
        'deploy: '  + params.deploy + ',' +
