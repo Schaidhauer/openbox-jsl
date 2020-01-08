@@ -17,7 +17,7 @@ def call(Map params) {
 
     // Executa o ansible para deploy na AWS
     sh 'ls -lasht /var/jenkins_home'
-    sh 'docker run --rm --mount type=bind,src=' + sshKeyDir  + ',destination=/ansible/ssh ' +
+    sh 'docker run --rm -v ' + sshKeyDir  + ':/ansible/ssh ' +
        'ansible-docker:latest ansible-playbook ' + 
        '/ansible/' + params.playbook + ' --extra-vars "{' +
        'deploy: '  + params.deploy + ',' +
