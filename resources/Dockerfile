@@ -61,8 +61,6 @@ VOLUME [ "/ansible" ]
 # e restaura as permissões necessárias
 COPY --from=intermediate /root/ansible /ansible
 
-RUN ls -lasht /ansible/ssh
-
 # Instala dependencias do Ansible
 RUN pip install boto botocore boto3
 
