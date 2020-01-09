@@ -73,3 +73,4 @@ RUN echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config
 # Define qual chave deve ser
 ARG REPO_SSH_PRIVATE_KEY_FILE
 COPY ${REPO_SSH_PRIVATE_KEY_FILE} /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
+RUN chmod 600 /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
