@@ -12,9 +12,9 @@ def call(Map params) {
     sh "echo -n '" + libraryResource('Dockerfile') + "' > /var/jenkins_home/tmp/Dockerfile"
 
     // Cria imagem do aws-ansible
-    sh 'docker build --rm --build-arg ' +
-       'ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
-       'REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname
+    sh 'docker build --rm ' + '
+       '--build-arg ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
+       '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname + ' ' +
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     // Executa o ansible para deploy na AWS
