@@ -8,7 +8,7 @@ def call(Map params) {
 
     // Cria arquivos com chaves de acesso aos repositórios do aws-ansible e do projeto em questão
     sh "cp " + params.sshGitKey + " " + sshKeyDir + "/" + sshKeyFile
-    sh "cp " + params.sshRepoKey + " " + sshKeyDir + "/repokey && chmod 644 " + sshKeyDir + "/" + params.keyname
+    sh "cp " + params.sshRepoKey + " " + sshKeyDir + "/" + params.keyname  + " && chmod 644 " + sshKeyDir + "/" + params.keyname
     sh "echo -n '" + libraryResource('Dockerfile') + "' > /var/jenkins_home/tmp/Dockerfile"
 
     // Cria imagem do aws-ansible
