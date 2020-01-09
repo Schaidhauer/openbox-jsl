@@ -24,7 +24,9 @@ def call(Map params) {
        'deploy: '  + params.deploy + ',' +
        'ec2_access_key: ' + params.accessKey + ',' +
        'ec2_secret_key: ' + params.secretKey + ',' +
-       'jenkins_key_name: ' + params.keyname  + '}"'
+       'jenkins_key_name: ' + params.keyname  + ',' +
+       'admin_username: ' + params.username +  ',' + 
+       'admin_public_key: ' + params.public_key + ''}"'
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'
