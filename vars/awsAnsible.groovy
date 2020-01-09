@@ -8,11 +8,13 @@ def call(Map params) {
 
     // Cria arquivos com chaves de acesso aos repositórios do aws-ansible e do projeto em questão
     sh "cp " + params.sshGitKey + " " + sshKeyDir + "/" + sshKeyFile
-    sh "cp " + params.sshRepoKey + " " + sshKeyDir + "/repokey && chmod 644 " + sshKeyDir + "/repokey"
+    sh "cp " + params.sshRepoKey + " " + sshKeyDir + "/repokey && chmod 644 " + sshKeyDir + "/" + params.keyname
     sh "echo -n '" + libraryResource('Dockerfile') + "' > /var/jenkins_home/tmp/Dockerfile"
 
     // Cria imagem do aws-ansible
-    sh 'docker build --rm --build-arg SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
+    sh 'docker build --rm --build-arg ' +
+       'ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
+       'REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname
        '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     // Executa o ansible para deploy na AWS
@@ -22,7 +24,7 @@ def call(Map params) {
        'deploy: '  + params.deploy + ',' +
        'ec2_access_key: ' + params.accessKey + ',' +
        'ec2_secret_key: ' + params.secretKey + ',' +
-       'key_name: ' + params.keyname  + '}"'
+       'jenkins_key_name: ' + params.keyname  + '}"'
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'

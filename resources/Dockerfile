@@ -13,10 +13,10 @@ FROM python:3.6-alpine AS intermediate
 
 RUN apk add --update git openssh-client sshpass
 
-# Copia chaves necessarias para clonar
-ARG SSH_PRIVATE_KEY_FILE
+# Copia chaves necessarias para clonar o repositório aws-ansible
+ARG ANSIBLE_SSH_PRIVATE_KEY_FILE
 RUN mkdir /root/.ssh/
-COPY ${SSH_PRIVATE_KEY_FILE} /root/.ssh/github_rsa
+COPY ${ANSIBLE_SSH_PRIVATE_KEY_FILE} /root/.ssh/github_rsa
 
 # Corrige as permissões
 RUN chmod 700 /root/.ssh && chmod 600 /root/.ssh/github_rsa
@@ -69,3 +69,7 @@ RUN pip install ansible==2.9
 
 # Define arquivo de hosts conhecidos para o SSH
 RUN echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config
+
+# Define qual chave deve ser
+ARG REPO_SSH_PRIVATE_KEY_FILE
+COPY ${REPO_SSH_PRIVATE_KEY_FILE} /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
