@@ -15,7 +15,7 @@ def call(Map params) {
     sh 'docker build --rm ' + ' ' +
        '--build-arg ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
        '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname + ' ' +
-       '--no-cache -f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
+       '-f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     // Executa o ansible para deploy na AWS
     sh 'docker run --rm -v ' + sshKeyDir + ':/ansible/ssh/tmp ' +
