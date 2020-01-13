@@ -27,7 +27,7 @@ def call(Map params) {
        'ec2_secret_key: ' + params.secretKey + ',' +
        'jenkins_key_name: ' + params.keyname  + ',' +
        'admin_username: ' + params.username +  ',' + 
-       'admin_public_key: ' + params.public_key + '}"'
+       'admin_public_key: ' + params.public_key + '}" -vvvv'
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'
