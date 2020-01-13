@@ -23,6 +23,7 @@ def call(Map params) {
        'app_id: ' + params.app + ',' +
        'deploy: '  + params.deploy + ',' +
        'use_git: ' + params.useGit + ',' +
+       'use_base: ' + params.useBase  + ',' +
        'ec2_access_key: ' + params.accessKey + ',' +
        'ec2_secret_key: ' + params.secretKey + ',' +
        'jenkins_key_name: ' + params.keyname  + ',' +
