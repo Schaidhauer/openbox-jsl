@@ -18,7 +18,7 @@ def call(Map params) {
        '-f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
     // Executa o ansible para deploy na AWS
-    sh 'docker run --rm ' +
+    sh 'docker run --rm --no-cache ' +
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
        'app_id: ' + params.app + ',' +
        'deploy: '  + params.deploy + ',' +
