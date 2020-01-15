@@ -12,7 +12,7 @@ def call(Map params) {
     sh "echo -n '" + libraryResource('Dockerfile') + "' > /var/jenkins_home/tmp/Dockerfile"
 
     // Cria imagem do aws-ansible
-    sh 'docker build --rm --no-cache ' +
+    sh 'docker build --rm ' +
        '--build-arg ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
        '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname + ' ' +
        '-f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
@@ -28,7 +28,8 @@ def call(Map params) {
        'ec2_secret_key: ' + params.secretKey + ',' +
        'jenkins_key_name: ' + params.keyname  + ',' +
        'admin_username: ' + params.username +  ',' + 
-       'admin_public_key: ' + params.public_key + '}"'
+       'admin_public_key: ' + params.public_key + ',' +
+       'sync_dirs: ' + params.directories +'}"'
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'
