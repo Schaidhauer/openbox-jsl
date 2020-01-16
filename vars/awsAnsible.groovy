@@ -30,7 +30,7 @@ def call(Map params) {
        'admin_username: ' + params.username +  ', ' + 
        'admin_public_key: ' + params.public_key + ', ' +
        'sync_dirs: ' + params.directories + ', ' + 
-       'new_db: ' + params.new_db + ', ' + 
+       'new_db: ' + params.newBase + ', ' + 
        'use_awscli: ' + params.useAwscli + '}"'
 
     // Remove imagem após uso
