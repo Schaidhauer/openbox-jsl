@@ -20,16 +20,18 @@ def call(Map params) {
     // Executa o ansible para deploy na AWS
     sh 'docker run --rm ' +
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
-       'app_id: ' + params.app + ',' +
-       'deploy: '  + params.deploy + ',' +
-       'use_git: ' + params.useGit + ',' +
-       'use_base: ' + params.useBase  + ',' +
-       'ec2_access_key: ' + params.accessKey + ',' +
-       'ec2_secret_key: ' + params.secretKey + ',' +
-       'jenkins_key_name: ' + params.keyname  + ',' +
-       'admin_username: ' + params.username +  ',' + 
-       'admin_public_key: ' + params.public_key + ',' +
-       'sync_dirs: ' + params.directories +'}"'
+       'app_id: ' + params.app + ', ' +
+       'deploy: '  + params.deploy + ', ' +
+       'use_git: ' + params.useGit + ', ' +
+       'use_base: ' + params.useBase  + ', ' +
+       'ec2_access_key: ' + params.accessKey + ', ' +
+       'ec2_secret_key: ' + params.secretKey + ', ' +
+       'jenkins_key_name: ' + params.keyname  + ', ' +
+       'admin_username: ' + params.username +  ', ' + 
+       'admin_public_key: ' + params.public_key + ', ' +
+       'sync_dirs: ' + params.directories + ', ' + 
+       'new_db: ' + params.new_db + ', ' + 
+       'use_awscli: ' + params.useAwscli + '}"'
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'
