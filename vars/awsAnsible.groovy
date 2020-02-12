@@ -40,7 +40,7 @@ def call(Map params) {
        'use_awscli: ' + params.useAwscli + '}"'
 
     // Remove imagem após uso
-    // sh 'docker rmi -f ansible-docker:latest'
+    sh 'docker rmi -f ansible-docker:latest'
     
     // Apaga artefatos após deploy
     if (params.containsKey('reactBuild')) {
