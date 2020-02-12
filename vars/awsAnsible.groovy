@@ -19,9 +19,9 @@ def call(Map params) {
 
     String reactBuild = ''
     if (params.containsKey('reactBuild')) {
-       sh 'Montando volume com build de produção do react server..'
+       sh 'echo "Montando volume com build de produção do react server.."'
        reactVolume = '-v ' + params.reactBuild + ':/ansible/roles/react-server/files/build'
-       sh 'Parâmetro adicional a ser passado no docker-run: ' + reactVolume
+       sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + reactVolume + '"'
     }
 
     // Executa o ansible para deploy na AWS
