@@ -25,7 +25,7 @@ def call(Map params) {
     }
 
     // Executa o ansible para deploy na AWS
-    sh 'docker run --rm ' + reactVolume + ' '
+    sh 'docker run --rm ' + reactVolume + ' ' +
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
        'app_id: ' + params.app + ', ' +
        'deploy: '  + params.deploy + ', ' +
