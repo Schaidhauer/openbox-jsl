@@ -45,7 +45,7 @@ def call(Map params) {
     // Apaga artefatos após deploy
     if (params.containsKey('reactBuild')) {
        sh 'echo "Apagando artefatos"'
-       sh 'rm -f ' + params.reactBuild
+       sh 'rm -rf ' + params.reactBuild
     }
 
     // Chaves já foram utilizadas, então deleta
