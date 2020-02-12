@@ -25,7 +25,7 @@ def call(Map params) {
     }
 
     // Executa o ansible para deploy na AWS
-    sh 'docker run --rm ' + reactVolume + ' ' +
+    sh 'docker run ' + reactVolume + ' ' +
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
        'app_id: ' + params.app + ', ' +
        'deploy: '  + params.deploy + ', ' +
@@ -40,11 +40,11 @@ def call(Map params) {
        'use_awscli: ' + params.useAwscli + '}"'
 
     // Remove imagem após uso
-    sh 'docker rmi -f ansible-docker:latest'
+    // sh 'docker rmi -f ansible-docker:latest'
     
     // Apaga artefatos após deploy
     if (params.containsKey('reactBuild')) {
-       sh 'Apagando artefatos'
+       sh 'echo "Apagando artefatos"'
        sh 'rm -f ' + params.reactBuild
     }
 
