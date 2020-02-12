@@ -17,8 +17,15 @@ def call(Map params) {
        '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname + ' ' +
        '-f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
+    String reactBuild = ''
+    if (params.containsKey('reactBuild')) {
+       sh 'Montando volume com build de produção do react server..'
+       reactVolume = '-v ' + params.reactBuild + ':/ansible/roles/react-server/files/build'
+       sh 'Parâmetro adicional a ser passado no docker-run: ' + reactVolume
+    }
+
     // Executa o ansible para deploy na AWS
-    sh 'docker run --rm -v ' + params.reactBuild + ':/ansible/roles/react-server/files/build' +
+    sh 'docker run --rm ' + reactVolume + ' '
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
        'app_id: ' + params.app + ', ' +
        'deploy: '  + params.deploy + ', ' +
@@ -34,6 +41,12 @@ def call(Map params) {
 
     // Remove imagem após uso
     sh 'docker rmi -f ansible-docker:latest'
+    
+    // Apaga artefatos após deploy
+    if (params.containsKey('reactBuild')) {
+       sh 'Apagando artefatos'
+       sh 'rm -f ' + params.reactBuild
+    }
 
     // Chaves já foram utilizadas, então deleta
     sh 'rm -rf ' + sshKeyDir
