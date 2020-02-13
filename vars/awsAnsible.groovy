@@ -44,10 +44,10 @@ def call(Map params) {
     sh 'docker rmi -f ansible-docker:latest'
     
     // Apaga artefatos após deploy
-    /*if (params.containsKey('reactBuild')) {
+    if (params.containsKey('reactBuild')) {
        sh 'echo "Apagando artefatos"'
        sh 'rm -rf ' + params.reactBuild
-    }*/
+    }
 
     // Chaves já foram utilizadas, então deleta
     sh 'rm -rf ' + sshKeyDir
