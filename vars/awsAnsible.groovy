@@ -17,7 +17,7 @@ def call(Map params) {
        '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + params.keyname + ' ' +
        '-f ' + sshKeyDir + '/Dockerfile -t ansible-docker:latest ' + sshKeyDir
 
-    String reactBuild = ''
+    String reactVolume = ''
     if (params.containsKey('reactBuild')) {
        sh 'echo "Montando volume com build de produção do react server.."'
        reactVolume = '-v ' + params.reactBuild + ':/ansible/roles/react-server/files/build'
