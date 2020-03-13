@@ -24,8 +24,16 @@ def call(Map params) {
        sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + reactVolume + '"'
     }
 
+    String yarnVolume = ''
+    if (params.containsKey('yarnBuild')) {
+       sh 'echo "Montando volume com build de produção do yarn-server.."'
+       yarnVolume = '-v ' + params.yarnBuild.build + ':/ansible/roles/yarn-server/files/build ' +
+                     '-v ' + params.yarnBuild.jsonPackage  +  ':/ansible/roles/yarn-server/files/package.json'
+       sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + yarnVolume + '"'
+    }
+
     // Executa o ansible para deploy na AWS
-    sh 'docker run ' + reactVolume + ' ' +
+    sh 'docker run ' + reactVolume + ' ' + yarnVolume + ' ' +
        'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' +
        'app_id: ' + params.app + ', ' +
        'deploy: '  + params.deploy + ', ' +
