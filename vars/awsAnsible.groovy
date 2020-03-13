@@ -38,7 +38,8 @@ def call(Map params) {
        'app_id: ' + params.app + ', ' +
        'deploy: '  + params.deploy + ', ' +
        'use_base: ' + params.useBase  + ', ' +
-       'use_react: ' + params.useReact  + ', ' +	
+       'use_react: ' + params.useReact  + ', ' +
+       'use_yarn: ' + params.useYarn + ', ' +
        'ec2_access_key: ' + params.accessKey + ', ' +
        'ec2_secret_key: ' + params.secretKey + ', ' +
        'jenkins_key_name: ' + params.keyname  + ', ' +
@@ -57,6 +58,13 @@ def call(Map params) {
        sh 'rm -rf ' + params.reactBuild
     }
 
-    // Chaves já foram utilizadas, então deleta
+    // Apaga artefatos após deploy
+    if (params.containsKey('yarnBuild')) {
+       sh 'echo "Apagando artefatos"'
+       sh 'rm -rf ' + params.yarnBuild.build
+       sh 'rm -rf ' + params.yarnBuild.jsonPackage
+    }
+    
+   // Chaves já foram utilizadas, então deleta
     sh 'rm -rf ' + sshKeyDir
 }
