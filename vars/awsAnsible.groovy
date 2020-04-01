@@ -40,6 +40,7 @@ def call(Map params) {
        'use_base: ' + params.useBase  + ', ' +
        'use_react: ' + params.useReact  + ', ' +
        'use_yarn: ' + params.useYarn + ', ' +
+       'use_pyapi: ' + params.usePyapi + ', ' +
        'ec2_access_key: ' + params.accessKey + ', ' +
        'ec2_secret_key: ' + params.secretKey + ', ' +
        'jenkins_key_name: ' + params.keyname  + ', ' +
