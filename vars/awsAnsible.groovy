@@ -68,6 +68,9 @@ def deployApp(Map params) {
 	if (params.containsKey('usePyapi') 
 		extraVar = extraVars + ', use_pyapi: true'
 
+	if (params.containsKey('useDockerapp') 
+		extraVar = extraVars + ', use_dockerapp: true'
+
 	if (params.containsKey('directories') 
 		extraVar = extraVars + ', sync_dirs: ' + params.directories
 
