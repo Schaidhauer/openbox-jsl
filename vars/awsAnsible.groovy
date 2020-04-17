@@ -57,25 +57,25 @@ def deployApp(Map params) {
 			   'admin_public_key: ' + params.public_key
 
 	if (params.containsKey('useBase'))
-		extraVar = extraVars + ', use_base: true, new_db: ' + params.newBase
+		extraVars = extraVars + ', use_base: true, new_db: ' + params.newBase
 	
 	if (params.containsKey('useReact')) 
-		extraVar = extraVars + ', use_react: true'
+		extraVars = extraVars + ', use_react: true'
 
 	if (params.containsKey('useYarn'))
-		extraVar = extraVars + ', use_yarn: true'
+		extraVars = extraVars + ', use_yarn: true'
 
 	if (params.containsKey('usePyapi')) 
-		extraVar = extraVars + ', use_pyapi: true'
+		extraVars = extraVars + ', use_pyapi: true'
 
 	if (params.containsKey('useDockerapp'))
-		extraVar = extraVars + ', use_dockerapp: true'
+		extraVars = extraVars + ', use_dockerapp: true'
 
 	if (params.containsKey('directories'))
-		extraVar = extraVars + ', sync_dirs: ' + params.directories
+		extraVars = extraVars + ', sync_dirs: ' + params.directories
 
 	if (params.containsKey('useAwscli'))
-		extraVar = extraVars + ', useAwscli: true'
+		extraVars = extraVars + ', useAwscli: true'
 	
 	// Executa o ansible para deploy na AWS
 	sh 'docker run' + volumes + ' ' +
