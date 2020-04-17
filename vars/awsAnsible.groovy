@@ -50,6 +50,7 @@ def deployApp(Map params) {
 	String extraVars = 'app_id: ' + params.app + ', ' +
 			   'deploy: '  + params.deploy + ', ' +
 	   		   'repository: ' + params.repository + ', ' +
+	   		   'branch: ' + params.branch + ', ' +
 			   'ec2_access_key: ' + params.accessKey + ', ' +
 			   'ec2_secret_key: ' + params.secretKey + ', ' +
 			   'jenkins_key_name: ' + params.keyname  + ', ' +
