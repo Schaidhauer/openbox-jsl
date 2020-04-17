@@ -30,7 +30,6 @@ def createAWSAnsibleImage(String repositoryKeypath,
 def deployApp(Map params) {
 
 	String volumes = ' '
-	String reactVolume = ''
 	if (params.containsKey('reactBuild')) {
 		String reactVolume = '-v ' + params.reactBuild + ':/ansible/roles/react-server/files/build'
 		sh 'echo "Montando volume com build de produção do react server"'
@@ -40,7 +39,7 @@ def deployApp(Map params) {
 
 	if (params.containsKey('yarnBuild')) {
 		sh 'echo "Montando volume com build de produção do yarn-server.."'
-		yarnVolume = '-v ' + params.yarnBuild.build + ':/ansible/roles/yarn-server/files/.next ' +
+		String yarnVolume = '-v ' + params.yarnBuild.build + ':/ansible/roles/yarn-server/files/.next ' +
 			     '-v ' + params.yarnBuild.jsonPackage  +  ':/ansible/roles/yarn-server/files/package.json ' +
 			     '-v ' + params.yarnBuild.nextConfig +  ':/ansible/roles/yarn-server/files/next.config.js '
 		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + yarnVolume + '"'
