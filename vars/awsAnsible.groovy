@@ -79,7 +79,7 @@ def deployApp(Map params) {
 		extraVar = extraVars + ', useAwscli: true'
 	
 	// Executa o ansible para deploy na AWS
-	sh 'docker run ' + reactVolume + ' ' + yarnVolume + ' ' +
+	sh 'docker run' + volumes + ' ' +
 	   'ansible-docker:latest ansible-playbook deploy.playbook.yml --extra-vars "{' + extraVars + '}"'
  
 	// Apaga artefatos após deploy
