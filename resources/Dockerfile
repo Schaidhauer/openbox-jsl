@@ -77,5 +77,5 @@ RUN chmod 600 /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
 
 # Copia chave SSL
 ARG SSL_PRIVATE_KEY_FILE
-COPY ${SSL_PRIVATE_KEY_FILE} /ansible/ssh/${SSL_PRIVATE_KEY_FILE}
-RUN chmod 600 /ansible/ssh/${SSL_PRIVATE_KEY_FILE}
+COPY ${SSL_PRIVATE_KEY_FILE} /ansible/ssh/account.key
+RUN chmod 600 /ansible/ssh/account.key
