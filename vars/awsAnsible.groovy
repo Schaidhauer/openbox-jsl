@@ -23,6 +23,8 @@ def createAWSAnsibleImage(String repositoryKeypath,
 	sh "cp " + sslKeypath + " " + buildContext + "/" + sslKeyFile
 	sh "cp " + repositoryKeypath + " " + buildContext + "/" + repositoryKeyname  + " && chmod 600 " + buildContext + "/" + repositoryKeyname
 	sh "echo -n '" + libraryResource('Dockerfile') + "' > " + buildContext + "/Dockerfile"
+
+	sh "ls -lasht " + buildContext
  
 	// Cria imagem do aws-ansible	
 	sh 'docker build --rm --no-cache ' +
