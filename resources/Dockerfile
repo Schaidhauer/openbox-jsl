@@ -70,7 +70,12 @@ RUN pip install ansible==2.9
 # Define arquivo de hosts conhecidos para o SSH
 RUN echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config
 
-# Define qual chave deve ser
+# Copia chave do repositório
 ARG REPO_SSH_PRIVATE_KEY_FILE
 COPY ${REPO_SSH_PRIVATE_KEY_FILE} /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
 RUN chmod 600 /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
+
+# Copia chave SSL
+ARG SSL_PRIVATE_KEY_FILE
+COPY ${SSL_PRIVATE_KEY_FILE} /ansible/ssh/${SSL_PRIVATE_KEY_FILE}
+RUN chmod 600 /ansible/ssh/${SSL_PRIVATE_KEY_FILE}

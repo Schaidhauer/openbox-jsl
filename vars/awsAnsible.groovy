@@ -1,5 +1,5 @@
 def call(Map params) {
-	createAWSAnsibleImage(params.sshRepoKey, params.sshGitKey, params.keyname);
+	createAWSAnsibleImage(params.sshRepoKey, params.sshGitKey, params.keyname, params.sslAccountKey);
 	deployApp(params);
 	clearEnv();
 }
@@ -7,8 +7,10 @@ def call(Map params) {
 // Cria a imagem
 def createAWSAnsibleImage(String repositoryKeypath,
 		       	  String ansibleKeypath,
-		          String repositoryKeyname) {
+		          String repositoryKeyname,
+			  String sslKeypath) {
 
+	sslKeyFile = "account.key"
 	sshKeyFile = "rsa.key"
     	buildContext = "/var/jenkins_home/tmp"
 
@@ -16,7 +18,9 @@ def createAWSAnsibleImage(String repositoryKeypath,
 	sh "mkdir " + buildContext + " || rm -f " + buildContext + "/*"
 
 	// Cria arquivos com chaves de acesso aos repositórios aws-ansible e do projeto em questão
+	// Agora também cria arquivo com chave privada da conta associada ao certificado de domínio
 	sh "cp " + ansibleKeypath + " " + buildContext + "/" + sshKeyFile
+	sh "cp " + sslKeypath + " " + buildContext + "/" + sslKeyFile
 	sh "cp " + repositoryKeypath + " " + buildContext + "/" + repositoryKeyname  + " && chmod 600 " + buildContext + "/" + repositoryKeyname
 	sh "echo -n '" + libraryResource('Dockerfile') + "' > " + buildContext + "/Dockerfile"
  
@@ -24,6 +28,7 @@ def createAWSAnsibleImage(String repositoryKeypath,
 	sh 'docker build --rm --no-cache ' +
 	   '--build-arg ANSIBLE_SSH_PRIVATE_KEY_FILE=' + sshKeyFile + ' ' +
 	   '--build-arg REPO_SSH_PRIVATE_KEY_FILE=' + repositoryKeyname + ' ' +
+	   '--build-arg SSL_PRIVATE_KEY_FILE=' + sslKeyFile + ' ' +
 	   '-f ' + buildContext + '/Dockerfile -t ansible-docker:latest ' + buildContext
 }
 
