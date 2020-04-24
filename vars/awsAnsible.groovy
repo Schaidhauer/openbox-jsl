@@ -45,14 +45,6 @@ def deployApp(Map params) {
 		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + yarnVolume + '"'
 		volumes = volumes + yarnVolume + ' '
 	}
-	
-	if (params.containsKey('useSsl')) {
-		sh 'echo "Montando volume com certificado e chave privada.."'
-		String sslVolume = '-v ' + params.certKey + ':/ansible/roles/docker-app/files/cert.key ' +
-			     	   '-v ' + params.certCrt  +  ':/ansible/roles/docker-app/files/cert.crt'
-		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + sslVolume + '"'
-		volumes = volumes + sslVolume + ' '
-	}
 
 	String extraVars = 'app_id: ' + params.app + ', ' +
 			   'deploy: '  + params.deploy + ', ' +
@@ -72,6 +64,9 @@ def deployApp(Map params) {
 
 	if (params.containsKey('useYarn'))
 		extraVars = extraVars + ', use_yarn: true'
+	
+	if (params.containsKey('useSsl'))
+		extraVars = extraVars + ', use_ssl: true'
 
 	if (params.containsKey('usePyapi')) 
 		extraVars = extraVars + ', use_pyapi: true'
