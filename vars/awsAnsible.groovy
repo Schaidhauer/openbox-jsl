@@ -1,7 +1,7 @@
 def call(Map params) {
 	createAWSAnsibleImage(params.sshRepoKey, params.sshGitKey, params.keyname, params.sslAccountKey);
 	deployApp(params);
-	clearEnv();
+	//clearEnv();
 }
 
 // Cria a imagem
