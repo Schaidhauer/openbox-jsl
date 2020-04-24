@@ -41,11 +41,19 @@ def deployApp(Map params) {
 		sh 'echo "Montando volume com build de produção do yarn-server.."'
 		String yarnVolume = '-v ' + params.yarnBuild.build + ':/ansible/roles/yarn-server/files/.next ' +
 			     '-v ' + params.yarnBuild.jsonPackage  +  ':/ansible/roles/yarn-server/files/package.json ' +
-			     '-v ' + params.yarnBuild.nextConfig +  ':/ansible/roles/yarn-server/files/next.config.js '
+			     '-v ' + params.yarnBuild.nextConfig +  ':/ansible/roles/yarn-server/files/next.config.js'
 		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + yarnVolume + '"'
 		volumes = volumes + yarnVolume + ' '
 	}
 	
+	if (params.containsKey('useSsl')) {
+		sh 'echo "Montando volume com certificado e chave privada.."'
+		String sslVolume = '-v ' + params.certKey + ':/ansible/roles/docker-app/files/cert.key ' +
+			     	   '-v ' + params.certCrt  +  ':/ansible/roles/docker-app/files/cert.crt'
+		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + sslVolume + '"'
+		volumes = volumes + sslVolume + ' '
+	}
+
 	String extraVars = 'app_id: ' + params.app + ', ' +
 			   'deploy: '  + params.deploy + ', ' +
 	   		   'repository: ' + params.repository + ', ' +
