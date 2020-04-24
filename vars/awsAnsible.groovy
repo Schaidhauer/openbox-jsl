@@ -66,7 +66,7 @@ def deployApp(Map params) {
 		extraVars = extraVars + ', use_yarn: true'
 	
 	if (params.containsKey('domain'))
-		extraVars = extraVars + ', use_ssl: true, app-domain: ' + params.domain
+		extraVars = extraVars + ', use_ssl: true, app-domain: \'' + params.domain + '\''
 
 	if (params.containsKey('usePyapi')) 
 		extraVars = extraVars + ', use_pyapi: true'
