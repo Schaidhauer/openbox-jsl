@@ -45,6 +45,13 @@ def deployApp(Map params) {
 		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + yarnVolume + '"'
 		volumes = volumes + yarnVolume + ' '
 	}
+	
+	if (params.containsKey('domain')) {
+		sh 'echo "Montando volume com chave privada da conta para SSL.."'
+		String accKey = '-v ' + params.accountKey + ':/ansible/roles/ssl/files/account.key'
+		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + accKey + '"'
+		volumes = volumes + accKey + ' '
+	}
 
 	String extraVars = 'app_id: ' + params.app + ', ' +
 			   'deploy: '  + params.deploy + ', ' +
