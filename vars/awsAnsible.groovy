@@ -48,7 +48,7 @@ def deployApp(Map params) {
 	
 	if (params.containsKey('domain')) {
 		sh 'echo "Montando volume com chave privada da conta para SSL.."'
-		String accKey = '-v ' + params.accountKey + ':/ansible/roles/ssl/files/account.key'
+		String accKey = '-v ' + params.sslAccountKey + ':/ansible/roles/ssl/files/account.key'
 		sh 'echo "Parâmetro adicional a ser passado no docker-run: ' + accKey + '"'
 		volumes = volumes + accKey + ' '
 	}
@@ -73,7 +73,7 @@ def deployApp(Map params) {
 		extraVars = extraVars + ', use_yarn: true'
 	
 	if (params.containsKey('domain'))
-		extraVars = extraVars + ', use_ssl: true, app-domain: \'' + params.domain + '\''
+		extraVars = extraVars + ', use_ssl: true, app_domain: \'' + params.domain + '\''
 
 	if (params.containsKey('usePyapi')) 
 		extraVars = extraVars + ', use_pyapi: true'
