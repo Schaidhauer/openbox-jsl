@@ -99,6 +99,8 @@ def deployApp(Map params) {
 			rdsVars = rdsVars + ', rds_user_key: ' + params.rdsUserKey
 		if (params.containsKey('rdsPassKey'))
 			rdsVars = rdsVars + ', rds_pass_key: ' + params.rdsPassKey
+		if (params.containsKey('rdsEngine'))
+			rdsVars = rdsVars + ', rds_engine: ' + params.rdsEngine
 
 		extraVars = extraVars + rdsVars
 	}
