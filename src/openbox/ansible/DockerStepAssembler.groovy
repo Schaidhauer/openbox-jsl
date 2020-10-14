@@ -20,7 +20,7 @@ class DockerStepAssembler
         for (vol in volumes)
             runArg += ("--volume " + vol.key + ":" + vol.value) + " ";
         
-        runArg += imageName + " " command;
+        runArg += imageName + " " + command;
         return runArg;
     }
 }
