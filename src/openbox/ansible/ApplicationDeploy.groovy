@@ -2,13 +2,10 @@ package openbox.ansible;
 
 class ApplicationDeploy
 {
-    static String STEP_BUILD_ANSIBLE = "docker build --rm --no-cache ";
     static String ANSIBLE_KEY_FILE = "rsa.key";
     static String DOCKER_BUILD_CTX = "/var/jenkins_home/tmp";
-    static String DOCKER_BUILD_ARG = "--build-arg ";
     static String DOCKER_BUILD_IMG = "ansible-docker:latest";
 
-    static String STEP_RUN_ANSIBLE = "docker run ";
     static String DOCKER_RUN_CMD = "ansible-playbook ecs.deploy.playbook.yml";
 
     private String cmd_build;
