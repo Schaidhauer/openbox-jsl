@@ -1,6 +1,6 @@
 import openbox.ansible.*;
 
-def start(Map params)
+def call(Map params)
 {
     // Configura ambiente para realizar deploy
     configure(params.sshGitKey);
