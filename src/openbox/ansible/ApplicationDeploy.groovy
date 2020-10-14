@@ -16,7 +16,8 @@ class ApplicationDeploy
         String awsSecretKey,
         String ecrPassword,
         String service,
-        String image
+        String image,
+        Map volumes
     ) {
 
         this.cmd_build = DockerStepAssembler.assembleDockerBuild(
@@ -27,7 +28,7 @@ class ApplicationDeploy
 
         this.cmd_run = DockerStepAssembler.assembleDockerRun(
             DOCKER_BUILD_IMG,
-            [],
+            volumes,
             DOCKER_RUN_CMD + ' --extra-vars: "{' + 
             "ec2_access_key: " + awsAccessKey +
             "ec2_secret_key: " + awsSecretKey +
