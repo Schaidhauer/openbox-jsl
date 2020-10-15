@@ -18,13 +18,20 @@ public class ApplicationDeployConfig
         String service,
         String image
     ) {
+    }
 
+    public String getBuildCmd()
+    {
         this.cmd_build = DockerStepAssembler.assembleDockerBuild(
             DOCKER_BUILD_IMG,
             ["ANSIBLE_SSH_PRIVATE_KEY_FILE": ApplicationDeployConfig.ANSIBLE_KEY_FILE],
             DOCKER_BUILD_CTX
         );
+        return this.cmd_build;
+    }
 
+    public String getRunCmd()
+    {
         this.cmd_run = DockerStepAssembler.assembleDockerRun(
             DOCKER_BUILD_IMG,
             [],
@@ -35,15 +42,6 @@ public class ApplicationDeployConfig
             "app_service: " + service +
             "app_image: " + image + '}"'
         );
-    }
-
-    public String getBuildCmd()
-    {
-        return this.cmd_build;
-    }
-
-    public String getRunCmd()
-    {
         return this.cmd_run;
     }
 }
