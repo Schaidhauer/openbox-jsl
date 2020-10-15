@@ -21,7 +21,7 @@ public class ApplicationDeployConfig
 
         this.cmd_build = DockerStepAssembler.assembleDockerBuild(
             DOCKER_BUILD_IMG,
-            ["ANSIBLE_SSH_PRIVATE_KEY_FILE": ApplicationDeploy.ANSIBLE_KEY_FILE],
+            ["ANSIBLE_SSH_PRIVATE_KEY_FILE": ApplicationDeployConfig.ANSIBLE_KEY_FILE],
             DOCKER_BUILD_CTX
         );
 
