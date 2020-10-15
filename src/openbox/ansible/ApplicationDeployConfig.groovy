@@ -37,7 +37,6 @@ public class ApplicationDeployConfig
     ) {
         this.cmd_run = DockerStepAssembler.assembleDockerRun(
             DOCKER_BUILD_IMG,
-            [],
             DOCKER_RUN_CMD + ' --extra-vars: "{' + 
             "ec2_access_key: " + awsAccessKey + "," +
             "ec2_secret_key: " + awsSecretKey + "," +

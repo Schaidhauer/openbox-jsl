@@ -14,13 +14,9 @@ class DockerStepAssembler
         return buildArg;
     }
 
-    public static String assembleDockerRun(String imageName, Map volumes, String command)
+    public static String assembleDockerRun(String imageName, String command)
     {
-        String runArg = "docker run ";
-        for (vol in volumes)
-            runArg += ("--volume " + vol.key + ":" + vol.value) + " ";
-        
-        runArg += imageName + " " + command;
+        String runArg = "docker run " + imageName + " " + command;
         return runArg;
     }
 }
