@@ -71,7 +71,7 @@ VOLUME [ "/ansible" ]
 COPY --from=intermediate /root/ansible /ansible
 
 # Instala dependencias do Ansible
-RUN pip install boto botocore boto3
+RUN pip install boto botocore boto3 docker
 
 # Instala o Ansible
 RUN pip install ansible==2.10.1
