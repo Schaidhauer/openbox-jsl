@@ -33,17 +33,26 @@ RUN ssh-keyscan -Ht rsa github.com >> /etc/ssh/ssh_known_hosts
 # clona repositório do playbook de deploy na AWS
 RUN eval "$(ssh-agent)" \
     ssh-add -k /root/.ssh/github_rsa; \
-    git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/
-#    chmod 600 /root/ansible/ssh/* &&\
-#    chmod 700 /root/ansible/ssh &&\
-#    chmod 644 /root/ansible/ssh/*.pub
+    git clone git@github.com:Schaidhauer/aws-ansible.git /root/ansible/ &&\
+    chmod 600 /root/ansible/ssh/* &&\
+    chmod 700 /root/ansible/ssh &&\
+    chmod 644 /root/ansible/ssh/*.pub
 
 ######## ESTÁGIO FINAL ########
 # Configura o ambiente para executar o Ansible
 FROM python:3.6-alpine
 
 # Instala dependencias
-RUN apk add --update build-base python-dev py-pip jpeg-dev zlib-dev libffi-dev openssl-dev openssh-client sshpass
+RUN apk add --update build-base \
+                    python-dev \
+                    py-pip \
+                    jpeg-dev \
+                    zlib-dev \
+                    libffi-dev \
+                    openssl-dev \
+                    openssh-client \ 
+                    sshpass \ 
+                    git
 
 # Atualiza pip
 RUN pip install --upgrade pip
@@ -69,3 +78,11 @@ RUN pip install ansible==2.10.1
 
 # Instala plugin community.aws
 RUN ansible-galaxy collection install community.aws
+
+# Define arquivo de hosts conhecidos para o SSH
+RUN echo "UserKnownHostsFile /ansible/ssh/known_hosts" >> /etc/ssh/ssh_config
+
+# Copia chave do repositório
+ARG REPO_SSH_PRIVATE_KEY_FILE
+COPY ${REPO_SSH_PRIVATE_KEY_FILE} /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
+RUN chmod 600 /ansible/ssh/${REPO_SSH_PRIVATE_KEY_FILE}
