@@ -16,7 +16,7 @@ class DockerStepAssembler
 
     public static String assembleDockerRun(String imageName, String command)
     {
-        String runArg = "docker run " + imageName + " " + command;
+        String runArg = "docker run -v /var/run/docker.sock:/var/run/docker.sock " + imageName + " " + command;
         return runArg;
     }
 }
