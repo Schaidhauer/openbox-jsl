@@ -65,7 +65,7 @@ COPY --from=intermediate /root/ansible /ansible
 RUN pip install boto botocore boto3
 
 # Instala o Ansible
-RUN pip install ansible==2.11
+RUN pip install ansible==2.10.1
 
 # Instala plugin community.aws
 RUN ansible-galaxy collection install community.aws
