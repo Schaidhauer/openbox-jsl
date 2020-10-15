@@ -39,16 +39,14 @@ public class ApplicationDeployConfig
             DOCKER_BUILD_IMG,
             [],
             DOCKER_RUN_CMD + ' --extra-vars: "{' + 
-            "ec2_access_key: " + awsAccessKey + ","
-            "ec2_secret_key: " + awsSecretKey + ","
-            "ecr_password: " +  ecrPassword + ","
-            "app_service: " + service + ","
-            "app_image: " + image ","
-            "jenkins_key_name: " + repositoryKeyname ","
-            "repository: " + repository ","
-            "branch: " + branch ","
-            + '}"'
-
+            "ec2_access_key: " + awsAccessKey + "," +
+            "ec2_secret_key: " + awsSecretKey + "," +
+            "ecr_password: " +  ecrPassword + "," +
+            "app_service: " + service + "," +
+            "app_image: " + image + "," +
+            "jenkins_key_name: " + repositoryKeyname + "," +
+            "repository: " + repository + ","
+            "branch: " + branch + '}"'
         );
         return this.cmd_run;
     }
