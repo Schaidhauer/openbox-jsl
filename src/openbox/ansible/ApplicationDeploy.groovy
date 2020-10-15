@@ -11,7 +11,7 @@ class ApplicationDeploy
     private String cmd_build;
     private String cmd_run;
 
-    public ApplicationDeploy(
+    ApplicationDeploy(
         String awsAccessKey,
         String awsSecretKey,
         String ecrPassword,
