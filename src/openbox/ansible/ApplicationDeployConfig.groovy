@@ -45,7 +45,7 @@ public class ApplicationDeployConfig
             "app_service: " + service + "," +
             "app_image: " + image + "," +
             "jenkins_key_name: " + repositoryKeyname + "," +
-            "repository: " + repository + ","
+            "repository: " + repository + "," +
             "branch: " + branch + '}"'
         );
         return this.cmd_run;
