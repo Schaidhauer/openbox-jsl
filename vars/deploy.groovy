@@ -1,4 +1,4 @@
-import openbox.ansible.*;
+import openbox.ansible.ApplicationDeploy;
 
 def call(Map params)
 {
