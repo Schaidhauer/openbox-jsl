@@ -1,6 +1,6 @@
 package openbox.ansible;
 
-class ApplicationDeployConfig
+public class ApplicationDeployConfig
 {
     static String ANSIBLE_KEY_FILE = "rsa.key";
     static String DOCKER_BUILD_CTX = "/var/jenkins_home/tmp";
@@ -16,8 +16,7 @@ class ApplicationDeployConfig
         String awsSecretKey,
         String ecrPassword,
         String service,
-        String image,
-        Map volumes
+        String image
     ) {
 
         this.cmd_build = DockerStepAssembler.assembleDockerBuild(
@@ -28,7 +27,7 @@ class ApplicationDeployConfig
 
         this.cmd_run = DockerStepAssembler.assembleDockerRun(
             DOCKER_BUILD_IMG,
-            volumes,
+            [],
             DOCKER_RUN_CMD + ' --extra-vars: "{' + 
             "ec2_access_key: " + awsAccessKey +
             "ec2_secret_key: " + awsSecretKey +

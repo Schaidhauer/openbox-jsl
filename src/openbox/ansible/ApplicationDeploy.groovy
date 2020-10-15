@@ -9,8 +9,7 @@ def start(Map params)
         params.secretKey, 
         params.ecrPassword,
         params.service,
-        params.image,
-        []);
+        params.image);
     sh appDeploy.getBuildCmd();
     sh appDeploy.getRunCmd();
 
