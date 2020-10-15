@@ -4,7 +4,7 @@ class DockerStepAssembler
 {
     public static String assembleDockerBuild(String imageName, Map buildArgs, String context)
     {
-        String buildArg = "docker build ";
+        String buildArg = "docker build --no-cache ";
         for (arg in buildArgs)
             buildArg += ("--build-arg " + arg.key + "=" + arg.value) + " ";
 
