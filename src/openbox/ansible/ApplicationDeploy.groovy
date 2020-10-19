@@ -14,7 +14,8 @@ def start(Map params)
         params.image,
         params.keyname,
         params.repository,
-        params.branch
+        params.branch,
+	params.environment
     );
 
 }

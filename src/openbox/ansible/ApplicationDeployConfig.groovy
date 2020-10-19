@@ -33,7 +33,8 @@ public class ApplicationDeployConfig
                             String image,
                             String repositoryKeyname,
                             String repository,
-                            String branch
+                            String branch,
+                            String environmentVars
     ) {
         this.cmd_run = DockerStepAssembler.assembleDockerRun(
             DOCKER_BUILD_IMG,
@@ -45,7 +46,8 @@ public class ApplicationDeployConfig
             "app_image: " + image + "," +
             "jenkins_key_name: " + repositoryKeyname + "," +
             "repository: " + repository + "," +
-            "branch: " + branch + '}" -vvv'
+            "branch: " + branch + "," +
+	    "env_vars: " + environmentVars + '}" -vvv'
         );
         return this.cmd_run;
     }
