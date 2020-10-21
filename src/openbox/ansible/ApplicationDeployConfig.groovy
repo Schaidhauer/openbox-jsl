@@ -47,7 +47,7 @@ public class ApplicationDeployConfig
             "jenkins_key_name: " + repositoryKeyname + "," +
             "repository: " + repository + "," +
             "branch: " + branch + "," +
-	    "env_vars: " + environmentVars + '}" -vvv'
+	    "env_vars: " + environmentVars + '}" -v'
         );
         return this.cmd_run;
     }
