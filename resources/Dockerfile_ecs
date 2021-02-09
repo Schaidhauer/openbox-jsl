@@ -40,7 +40,7 @@ RUN eval "$(ssh-agent)" \
 
 ######## ESTÁGIO FINAL ########
 # Configura o ambiente para executar o Ansible
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 
 # Instala dependencias
 RUN apk add --update build-base \
@@ -55,6 +55,7 @@ RUN apk add --update build-base \
 		    gcc \
 		    musl-dev \
 		    cargo \
+		    rust \
                     git
 
 # Atualiza pip
