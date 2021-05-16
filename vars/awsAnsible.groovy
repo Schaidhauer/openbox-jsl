@@ -85,7 +85,25 @@ def deployApp(Map params) {
 		extraVars = extraVars + ', sync_dirs: ' + params.directories
 
 	if (params.containsKey('useAwscli'))
-		extraVars = extraVars + ', useAwscli: true'
+		extraVars = extraVars + ', use_awscli: true'
+
+	if (params.containsKey('useRds')) {
+		rdsVars = ', use_rds: true, rds_base:  ' + params.rdsBase +
+			  ', rds_user: ' + params.rdsUser + ', rds_pass: ' + params.rdsPass
+
+		if (params.containsKey('rdsHostKey'))
+			rdsVars = rdsVars + ', rds_host_key: ' + params.rdsHostKey
+		if (params.containsKey('rdsBaseKey'))
+			rdsVars = rdsVars + ', rds_base_key: ' + params.rdsBaseKey
+		if (params.containsKey('rdsUserKey'))
+			rdsVars = rdsVars + ', rds_user_key: ' + params.rdsUserKey
+		if (params.containsKey('rdsPassKey'))
+			rdsVars = rdsVars + ', rds_pass_key: ' + params.rdsPassKey
+		if (params.containsKey('rdsEngine'))
+			rdsVars = rdsVars + ', rds_engine: ' + params.rdsEngine
+
+		extraVars = extraVars + rdsVars
+	}
 	
 	// Executa o ansible para deploy na AWS
 	sh 'docker run' + volumes + ' ' +
